@@ -20,13 +20,15 @@ jobs:
 
     - name: Unzip project files
       run: |
-        unzip Athar-Android-Starter-1.zip || unzip *.zip
-        cd Athar || true
-
-    - name: Build APK with Gradle
-      run: |
-        chmod +x gradlew || true
-        ./gradlew assembleDebug || gradlew build
+        unzip -o Athar-Android-Starter-1.zip || unzip -o *.zip
+        # البحث عن المجلد الذي يحتوي على gradlew والدخول إليه
+        GRADLE_DIR=$(find . -maxdepth 3 -name "gradlew" -exec dirname {} \;)
+        echo "Found gradlew in: $GRADLE_DIR"
+        if [ -n "$GRADLE_DIR" ]; then
+          cd "$GRADLE_DIR"
+        fi
+        chmod +x gradlew
+        ./gradlew assembleDebug
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
