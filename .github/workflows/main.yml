@@ -22,12 +22,12 @@ jobs:
       run: |
         unzip -o Athar-Android-Starter-1.zip || unzip -o *.zip
 
-    - name: Generate Gradle Wrapper & Build
+    - name: Generate Compatible Wrapper & Build
       run: |
         cd Athar
-        gradle wrapper
+        gradle wrapper --gradle-version 8.5
         chmod +x gradlew
-        ./gradlew assembleDebug
+        ./gradlew assembleDebug --warning-mode all
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
