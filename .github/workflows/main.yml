@@ -25,9 +25,9 @@ jobs:
     - name: Generate Compatible Wrapper & Build
       run: |
         cd Athar
-        gradle wrapper --gradle-version 8.5
+        gradle wrapper --gradle-version 8.9
         chmod +x gradlew
-        ./gradlew assembleDebug --warning-mode all
+        ./gradlew assembleDebug
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
